@@ -1,0 +1,756 @@
+https://community.simplilearn.com/threads/pgp-do-mar-2022-cohort.69632/
+
+Launch the lab 
+
+Steps to  Launch the Lab from LMS
+
+> Go to https://lms.simplilearn.com/
+> Click on to Program button under Post Graduate Program in DevOps 
+> Select Course 2 - PD DO - DevOps Certification Training
+> Go to Practice Lab on left side and click on it
+> Click on DevOps in AWS V2
+> Click on Launch Lab button at right bottom
+> Click on RDP (Remote Desktop protocol) access 
+> Click on Start Instance button and click Yes
+> It will take a while for the lab environment to start. Pls wait
+> Click on RDP Access
+> Click on Auth URL - blue button - to launch the lab
+> Lab will launch , click on OK button to proceed
+> Lab desktop will launch
+
+
+Version Control with GIT
+********************
+
+Scenario 1:
+
+Check if we have git installed or not on labe
+
+$ sudo su -
+$  git –version
+  
+git version 2.34.1
+
+If git is not installed use following commands to install in it
+
+$ apt install git -y  ⇒ ubuntu
+$ yum install git -y ⇒ centos
+
+
+
+Scenario 2:
+
+Create a working directory
+
+$ sudo su -
+$ mkdir myproject
+$ cd myproject
+
+Create a file inside the directory
+
+$ touch index1.html
+
+Initialize git on the working directory
+
+$ git init
+
+This command will create a .git folder
+
+$ ls -al
+
+*******
+Scenario 2:
+
+Configure git for username and email :
+
+$ git config –global user.name Name
+$ git config –global user.email emailid
+
+3 types of configurations:
+
+System – config are available for every user and its repos
+Global  – config are available only to the current user and its repo
+Local - config available for the current dir only
+
+*****
+Scenario 3:
+
+Add file from working directory to local repo
+
+$ git status
+$ git add index1.html
+$ git status ⇒ check file is in staging area
+$ git commit -m “file added index1.html”
+$ git ls-files
+
+Scenario 4:
+******
+
+Modify an existing file that is already being tracked and add the changes to the repo
+
+$ vim index1.html ⇒ insert data and save the file
+
+$ git status   ⇒ changes will in red
+$ git add index1.html
+$ git status  ⇒ changes will in green
+$ git commit -m “modifcation added”
+
+[OR]
+
+$ vim index1.html
+$ git status ⇒ red color
+$ git commit -a -m “added modification”
+
+
+Scenario 5:
+
+$ git log 
+
+$ git log –oneline
+
+$ git show commit id ⇒ will display what changes were done in this commit
+
+
+Scenario 6:
+
+See the difference between version of a existing tracked file
+
+$ git diff filename1 filename2
+
+Scenario 7:
+
+******
+
+If you want certain files not to be version controlled then git can ignore them
+
+Now you will have to create a .gitignore file 
+
+In this file add the name of the files that are not to be tracked by
+
+
+
+Create 2 files 
+$ touch file1.txt file2.xml
+
+We want these files to be ignored
+
+Create .gitignore file
+
+$ vim .gitignore
+
+Add filename to be ignored
+
+*.xml
+*.txt
+
+Save the file
+
+Now give
+
+$ git status
+
+You will see both the files txt and xml are not being tracked by git
+However .gitignore is a file that has to be tracked
+
+So 
+$ git add .gitignore
+$ git commit -m “added .gitignore”
+
+
+
+   Scenario 8:
+********
+
+Changes are in  Unstagged , if we no longer need them, how can we remove that using git
+
+Take an existing file which is already tracked by git
+
+Make changes into it
+
+$ vim index1.html
+
+Add new lines
+
+Save the file
+
+$ git status ⇒ modified
+
+If user do not want those changes
+$ git restore index1.html
+
+
+Changes will be discarded from the file that is in working directory
+
+
+OR
+
+$ git checkout – filename
+
+Move the changes back to the Unstagged area
+
+Make changes into it
+
+$ vim index1.html
+
+Add new lines
+
+Save the file
+
+$ git status ⇒ modified
+
+$ git add .
+
+From staging move back to working directory
+
+$ git status
+
+$ git restore –staged index1.html
+
+OR
+
+$ git reset HEAD index1.html
+
+
+Scenario 10:
+
+Revert 
+
+Revert is used on a commit id
+
+Revert command will take your changes back to its previous state
+
+***
+
+
+When you will execute revert command–
+It will open editor to enter why you are reverting
+ Revert will also create a commit id
+
+
+
+git restore --source=c5f567 file1/to/restore file2/to/restore
+Or if you want to restore to the content of one commit before c5f567:
+git restore --source=c5f567~1 file1/to/restore file2/to/restore
+
+
+https://community.simplilearn.com/threads/pgp-do-mar-2022-cohort.69632/
+
+Launch the lab 
+
+Steps to  Launch the Lab from LMS
+
+> Go to https://lms.simplilearn.com/
+> Click on to Program button under Post Graduate Program in DevOps 
+> Select Course 2 - PD DO - DevOps Certification Training
+> Go to Practice Lab on left side and click on it
+> Click on DevOps in AWS V2
+> Click on Launch Lab button at right bottom
+> Click on RDP (Remote Desktop protocol) access 
+> Click on Start Instance button and click Yes
+> It will take a while for the lab environment to start. Pls wait
+> Click on RDP Access
+> Click on Auth URL - blue button - to launch the lab
+> Lab will launch , click on OK button to proceed
+> Lab desktop will launch
+
+***************
+Scenario 1:
+
+GIT Stashing
+
+Take an existing file index1.html
+
+$ vim index1.html
+Press i
+Make changes
+Press esc
+:wq!
+
+Make changes to the file and save it
+
+$ git status
+
+Changes will be  unstaged 
+
+Now we can stash the incomplete changes from unstaged area
+
+$ git stash
+
+Now check your list of stash
+
+$ git stash list
+
+$ git show stash@{0}
+
+This will show the incomplete changes that has been stashed
+
+
+If you want your changes to be back to be unstaged again
+
+$ git stash pop
+OR
+$ git stash pop stash@{0}
+
+Note: All stash is saved in . git/refs/stash
+
+*****************
+Scenario 2:
+—-----------------
+Branching and Merging
+
+Check the branch in Local repo
+
+$ git branch
+
+*Represents this is current branch
+
+Create a new branch
+
+$ git branch branchname
+Eg: git branch f1
+
+Switch to a branch
+$ git checkout f1
+
+$ git log –oneline
+You will see you are branch f11
+
+Create a file and commit the changes on branch f1
+
+$ touch newfile
+$ git add .
+$ git commit -m “added file to branch f1”
+
+$ git log –oneline
+
+New commit is on f1 and will not be available on master branch
+
+Lets switch back to master
+
+$ git checkout master
+$ git log –oneline
+
+New commit done on b1 branch is not on master
+
+Scenario 3:
+—----------------------------------
+Merging:
+*********
+$ git branch
+
+You must be on branch master – you will always switch to the branch where we have to merge
+
+Lets merge f1 branch to Master
+
+Command : git merge source branch destination branchname
+
+$ git checkout master
+
+
+Eg: git merge f1 master
+
+$ git log –oneline
+
+New commit is now on Master branch too.
+
+Scenario 4:
+—--------------------------------------
+Delete the branch
+**************
+
+Lets delete the branch after merging to master.
+
+$ git branch -d branchname
+
+Delete a branch before merging with master
+
+$ git branch -D branchname
+
+Rename a branch
+**********
+
+$ git -m <oldname> <newname>
+
+Eg: git -m b1 feture1
+
+*********************************************
+
+
+
+Scenario 5
+
+Remote Repository:
+
+Sign up by creating a username and password on github
+
+https://github.com/
+
+Enter username and password and successfully log on to github.
+*****************
+
+Scenario 6:
+—--------------
+Create personal Access Token on github
+***************
+
+This is needed for authentication while pushing files from local repo to remote repo
+
+Go to your UserDetails - right side  top corner 
+Click on Settings —>Scroll down, Left side you will select Developer settings option
+On the left side click on Personal Access tokens
+Click on generate new token button
+[you may be prompted to enter github password , pls enter that]
+
+Provide Following details :
+ A token name under Note -> token1
+Expiration : give anything
+Select Scope:
+Click on checkbox for
+Repo
+delete_repo
+Click on Generate token  and copy the token and save it in a notepad. We will use it latter
+
+*******************
+Scenario 7:
+—-------------------
+
+Create a Remote repository
+
+Click on + sign on right side and select New repository
+
+OR
+
+Click on new button (green color) on left side 
+
+New repository page will open
+
+Give a unique repository name like DemoProject26March
+
+It should be a Public repo
+
+Click on Create repository button
+
+Remote repository is now created. 
+
+Copy the https URL of the repository
+
+Now let's connect Local repo to remote repo so as to share the local files
+
+$ git status
+
+Working tree to be clean
+
+Check you are on master branch
+
+$ git remote add origin [remote repo URL]
+
+Check if remote details on local
+
+$ git remote -v
+
+*********************************
+Scenario 8:
+****************************
+
+Push files from local repo to remote repo
+
+$ git push origin master
+
+Username : you github username
+Password : give Personal access token created earlier
+
+You will not be able to see the paste of personal access token. Just press enter, push will be successful.
+
+
+Files will be pushed to remote repo, go to remote repo and check.
+
+Scenario 9
+—----------------------
+Pull the files from remote to local
+
+Create a new file in github repo on Master branch
+Commit the changes
+Now go to local repo -> Master branch
+$ git branch
+$ git status ⇒ working tree to be clean
+$ git pull origin master
+
+
+Scenario 10:
+—----------------------
+Fetch the files from remote to local
+********
+Create a new file in github repo on Master branch
+
+Commit the changes
+
+Now go to local repo -> Master branch
+$ git branch
+$ git status ⇒ working tree to be clean
+
+$ git fetch origin master
+
+It will just fetch the changes and will not merge to the local repo or to the working directory.
+
+
+Scenario 11:
+—--------------------------
+
+Clone a repository from remote to local
+
+Create a new directory
+
+
+$ git clone github repo name
+$ ls
+You will see a folder with same name as remote repository name
+Copy of remote files are available in local
+
+Scenario 12:
+—---------------------------
+
+Fork a repo:
+
+Go to repository :
+
+https://github.com/Sonal0409/myproject26March.git
+
+And  Click on the fork button in github to copy a remote repo in to your github account.
+
+You will see the git hub repo myproject26March is now available in your github account too.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment to be done :
+
+
+Assignment 1:
+
+Git reset command and its options to be explored and share your learning
+
+Local repository
+
+$ git log –oneline
+
+Select a commit which has to your new HEAD
+
+
+$ git reset –hard commitid
+
+$ git reset –soft commitid
+
+Changes will move back to staging
+
+$ git rest –mixed commitid
+Changes will be unsaged
+
+Assignment 2:
+
+Attempt the cherry pick command on the branch
+
+Switch to master branch and merge only specific commit from feature branch
+
+$ git cherry-pick commitid from feature branch
+
+
+
+
+
+
+
+
+
+
+
+
+Passwordless Authentication with GIT and GITHUB using SSH
+*******************************
+
+
+Remote repo: 
+GitHub : Create a remote repo
+Local repo (repo on local machine) -> to GitHub account (remote repo)
+
+Connect our local repo with the remote repo:
+
+$ git remote add origin git@github.com:abhijithvg/mydemo-oct21.git
+Note: Here above URL is SSH url of remote repo
+$ git remote
+$ git remote -v
+
+Authorization:
+Connect your local machine with our github account using SSH:
+
+$ ssh-keygen
+[Press enter 3 times]
+
+$ cat ~/.ssh/id_rsa.pub
+[COPY THE PUBLIC KEY]
+
+Go to github → username on left top
+Click on Settings →Click on SSH & GPG keys option
+Click on New key button
+Copy paste the public key and save the changes
+
+Push your local repo to remote repo:
+$ git push -u origin main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
